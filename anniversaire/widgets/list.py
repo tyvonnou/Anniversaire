@@ -7,7 +7,7 @@ from .connect import Connect
 
 class List(QListWidget):
 
-    def __init__(self, parent, req=None):
+    def __init__(self, parent, req):
         super(List, self).__init__(parent)
         self.db = Connect()
         self.fields = []
@@ -31,11 +31,9 @@ Anniversaire dans {anniversaire} jours
         super(List, self).addItem(label)
         self.fields.append(query.value(0))
 
-    def fromQuery(self, q = None):
-        if not(q):
-            q = self.req
+    def fromTheQuery(self):
         self.clear()
-        query = self.db.query(q)
+        query = self.db.query(self.req)
         while (query.next()):
             self.addItem(query)
             
@@ -47,8 +45,9 @@ Anniversaire dans {anniversaire} jours
         if self.dialog.exec_(self.selectedId) == QDialog.Accepted:
             fieldsValues = {
                 'Nom': self.dialog.lineEditNom.text(),
-                'Prenom': self.dialog.lineEditPrenom.text(),
-                'naissance': self.dialog.naissance.selectedDate().toString("yyyy-MM-dd")
+                'Prenom': self.dialog.lineEditPrenom.text()
             }
+            if self.dialog.naissanceBool:
+                fieldsValues['naissance'] = self.dialog.naissance.selectedDate().toString("yyyy-MM-dd")
             self.db.updateWithId("Personne", fieldsValues, self.selectedId)
-            self.fromQuery()
+            self.fromTheQuery()

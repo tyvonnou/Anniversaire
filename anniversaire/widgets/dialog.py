@@ -36,6 +36,8 @@ class Dialog (QDialog):
             QLabel("Date naissance:"),
             self.naissance
         )
+        self.naissance.selectionChanged.connect(self.naissanceChanged)
+        self.naissanceBool = False
         b1 = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         b1.accepted.connect(self.accept)
         b1.rejected.connect(self.reject)
@@ -52,7 +54,11 @@ class Dialog (QDialog):
         self.lineEditNom.setText(res['Nom'])
         self.lineEditPrenom.setText(res['Prenom'])
         self.naissance.setSelectedDate(res['Date de naissance'])
+        print(self.naissance.selectedDate().toString())
         return super(Dialog, self).exec_()
+        
+    def naissanceChanged(self):
+        self.naissanceBool = True
 
 
 
