@@ -16,12 +16,10 @@ class List(QListWidget):
         self.req = req
 
     def addItem(self, query):
-        label = """
+        label = """************
 ID : {identifiant}
 Nom : {nom} {prenom}
-Âge : {age} ans
-Anniversaire dans {anniversaire} jours
--------""".format(
+Âge : {age} ans, prochain anniversaire dans {anniversaire} jours""".format(
                  identifiant=str(query.value(0)),
                  nom=query.value(1),
                  prenom=query.value(2),
@@ -36,6 +34,10 @@ Anniversaire dans {anniversaire} jours
         query = self.db.query(self.req)
         while (query.next()):
             self.addItem(query)
+    
+    def clear(self):
+        self.fields.clear()
+        super(List, self).clear()
             
     @property
     def selectedId(self):

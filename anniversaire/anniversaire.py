@@ -15,7 +15,7 @@ def main():
     mainW.setWindowIcon(QIcon(str(png)))
     central = widgets.Central(mainW)
     mainW.setCentralWidget(central)
-    mainW.resize(500, 400)
+    mainW.resize(600, 500)
     mainW.move(200, 150)
     mainW.show()
 

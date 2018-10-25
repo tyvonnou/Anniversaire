@@ -17,19 +17,19 @@ class Central(Box):
         #Liste de tout les anniversaires
         self.list = List(self, "SELECT * FROM v2_notnull;")
         self.list.fromTheQuery()
-
         self.tab = QTabWidget(self)
         self.addWidget(self.tab)
         self.tab.addTab(self.list, "Tout")
         #Liste des anniversaires dans les 20 prochains jours
         self.list20 = List(self, "SELECT * FROM v2_notnull WHERE `Jours restants` < 20 ;")
-        self.list20.fromTheQuery()
         self.tab.addTab(self.list20, "< 20")
         #Liste des anniversaires dans les 50 prochains jours
         self.list50 = List(self, "SELECT * FROM v2_notnull WHERE `Jours restants` < 50 ;")
-        self.list50.fromTheQuery()
         self.tab.addTab(self.list50, "< 50")
         #Liste où la date de naissances n'est pas renseigné
         self.listrens = List(self, "SELECT * FROM v2 WHERE v2.id NOT IN (SELECT id from v2_notnull);")
-        self.listrens.fromTheQuery()
         self.tab.addTab(self.listrens, "À Renseigner")
+        self.tab.currentChanged.connect(self.tabChanged)
+        
+    def tabChanged(self, index):
+        self.tab.currentWidget().fromTheQuery()
