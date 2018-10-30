@@ -54,7 +54,6 @@ class Dialog (QDialog):
         self.lineEditNom.setText(res['Nom'])
         self.lineEditPrenom.setText(res['Prenom'])
         self.naissance.setSelectedDate(res['Date de naissance'])
-        print(self.naissance.selectedDate().toString())
         return super(Dialog, self).exec_()
         
     def naissanceChanged(self):

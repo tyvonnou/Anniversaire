@@ -8,10 +8,10 @@ from pathlib import Path
 
 
 def main():
-    png = Path.joinpath(Path.cwd(), 'anniversaire', 'images', 'cake.png')
+    png = Path.joinpath(Path.cwd(),'images', 'cake.png')
     app = QApplication(sys.argv)
     mainW = QMainWindow()
-    mainW.setWindowTitle("Anniversaire")
+    mainW.setWindowTitle("Anniversaires")
     mainW.setWindowIcon(QIcon(str(png)))
     central = widgets.Central(mainW)
     mainW.setCentralWidget(central)

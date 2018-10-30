@@ -20,16 +20,20 @@ class Central(Box):
         self.tab = QTabWidget(self)
         self.addWidget(self.tab)
         self.tab.addTab(self.list, "Tout")
+        self.listA = List(self, "SELECT v2_notnull.ID, v2_notnull.Nom, v2_notnull.Prenom, v2_notnull.`Date de naissance`, v2_notnull.Âge, v2_notnull.`Jours restants` FROM v2_notnull, Personne WHERE MONTH(Personne.`naissance`) = MONTH(CURRENT_DATE) AND DAY(`naissance`) = DAY(CURRENT_DATE) AND Personne.id = v2_notnull.ID;")
+        self.tab.addTab(self.listA, "Aujourd'hui")
         #Liste des anniversaires dans les 20 prochains jours
-        self.list20 = List(self, "SELECT * FROM v2_notnull WHERE `Jours restants` < 20 ;")
-        self.tab.addTab(self.list20, "< 20")
+        self.list15 = List(self, "SELECT * FROM v2_notnull WHERE `Jours restants` < 15 ;")
+        self.tab.addTab(self.list15, "< 15")
         #Liste des anniversaires dans les 50 prochains jours
-        self.list50 = List(self, "SELECT * FROM v2_notnull WHERE `Jours restants` < 50 ;")
-        self.tab.addTab(self.list50, "< 50")
+        self.list45 = List(self, "SELECT * FROM v2_notnull WHERE `Jours restants` < 45 ;")
+        self.tab.addTab(self.list45, "< 45")
         #Liste où la date de naissances n'est pas renseigné
         self.listrens = List(self, "SELECT * FROM v2 WHERE v2.id NOT IN (SELECT id from v2_notnull);")
         self.tab.addTab(self.listrens, "À Renseigner")
         self.tab.currentChanged.connect(self.tabChanged)
+        #TODO: Bouton insert
+        #TODO: Bouton delete
         
     def tabChanged(self, index):
         self.tab.currentWidget().fromTheQuery()

@@ -2,11 +2,14 @@
 
 block_cipher = None
 
+added_files = [
+    ('anniversaire/images', 'images/'),
+]
 
 a = Analysis(['anniversaire/__main__.py'],
              pathex=['/home/theo/Bureau/anniversaire'],
              binaries=[],
-             datas=[],
+             datas=added_files,
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -22,12 +25,11 @@ exe = EXE(pyz,
           [],
           exclude_binaries=True,
           name='Anniversaires',	
-	  icon='anniversaire/images/cake.png',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=True, icon='anniversaire/images/cake.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
