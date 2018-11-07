@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 def main():
-    png = Path.joinpath(Path.cwd(),'images', 'cake.png')
+    png = Path.joinpath(Path(__file__).parent,'images', 'cake.png')
     app = QApplication(sys.argv)
     mainW = QMainWindow()
     mainW.setWindowTitle("Anniversaires")

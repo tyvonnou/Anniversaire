@@ -16,6 +16,7 @@ class List(QListWidget):
         self.req = req
 
     def addItem(self, query):
+   
         label = """************
 ID : {identifiant}
 Nom : {nom} {prenom}
@@ -26,6 +27,8 @@ Nom : {nom} {prenom}
                  age=str(query.value(4)),
                  anniversaire=str(query.value(5))
             )
+    
+  
         super(List, self).addItem(label)
         self.fields.append(query.value(0))
 
