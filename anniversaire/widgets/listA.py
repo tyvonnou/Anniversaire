@@ -27,10 +27,10 @@ Nom : {nom} {prenom}
                  age=str(query.value(4)),
             )
     
-        p = Path(Path(__file__).parent, 'images', 'cake.png')
+        
         super(ListA, self).addItem(label)
         self.fields.append(query.value(0))
-        self.item(len(self.fields) - 1).setIcon(QIcon(str(p)))
+        self.item(len(self.fields) - 1).setIcon(QIcon(str(Path(__file__).parent, 'images/cake.png')))
 		
     def fromTheQuery(self):
         self.clear()
