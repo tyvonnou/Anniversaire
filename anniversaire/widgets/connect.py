@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from PyQt5 import QtSql
 from PyQt5.QtGui import *
-from PyQt5.Qt import QPushButton
+from PyQt5.Qt import QPushButton, QApplication
+import sys 
 
+app = QApplication(sys.argv)
 db = QtSql.QSqlDatabase.addDatabase("QMYSQL")
 db.setHostName("127.0.0.1")
 db.setPort(3306)
